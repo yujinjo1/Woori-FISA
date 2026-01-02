@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+  width: 50%;
+  height: 200px;
+}
+.left {
+  background-color: red;
+  float: left;
+}
+.right {
+  background-color: blue;
+  float: right;
+}
+.container {
+  overflow: hidden; /* 부모 요소를 자식 요소로 인한 영향에서 보호하기 위해 overflow 속성 사용 */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box left"></div>
+        <div class="box right"></div>
+      </div>
+</body>
+</html>

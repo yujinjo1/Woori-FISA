@@ -1,0 +1,17 @@
+.width-default {
+    /* width: 100%; */
+    width: 80%;
+}
+span{
+    /*inline속성의 span은 컨텐츠(텍스트) 만큼의 사이즈를 차지하는 auto가 기본값*/
+    width: auto;
+}
+
+.width-px {
+    width: 300px;
+}
+
+.width-pct {
+    width: 50%;
+    /* w50p */
+}

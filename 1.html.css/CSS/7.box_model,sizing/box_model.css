@@ -1,0 +1,16 @@
+/* 직접 같이 타이핑하여 학습 */
+* {
+    /* box-sizing: 박스의 사이즈 크기를 잡는 기준 */
+    /* 기본값은 content-box */
+    /* box-sizing: content-box; */
+
+    /* border까지 합한 너비값 */
+    box-sizing: border-box;
+}
+
+.box {
+    width: 300px;
+    border: 2px solid blue;
+    padding: 20px;
+    margin: 40px;
+}
