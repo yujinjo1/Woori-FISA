@@ -1,3 +1,4 @@
 # exclude large / installer files
 00.sw/
 *.exe
+node_modules/

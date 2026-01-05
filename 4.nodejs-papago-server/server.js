@@ -1,3 +1,4 @@
+//기본 서버 연습용 코드”
 console.log('Hello Node!');
 
 //node.js 내장 모듈을 활용하여 간단하게 서버 생성 

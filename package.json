@@ -1,0 +1,24 @@
+{
+  "name": "woori-workspace",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/yujinjo1/Woori-FISA#readme",
+  "bugs": {
+    "url": "https://github.com/yujinjo1/Woori-FISA/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yujinjo1/Woori-FISA.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "superagent": "^10.2.3"
+  }
+}
