@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+</head>
+<body>
+    <div id="root">
+    </div>
+
+    
+
+    <script type="text/babel">
+        const coffee='커피ㅎㅎㅎ';
+            const MyCustomComponent = () => {
+                console.log('MyCustomComponent호출됨!');
+                return <ul>
+                        <h2>Things cats like</h2>
+                        <li>{1+1}</li>
+                        <li>{coffee}</li>
+                        <li>차</li>
+                        <li>우유</li>
+
+                    </ul>
+            }
+
+        //MyCustomComponent를 자식요소로 두고 있는 부모 컨포넌트
+        const MultipleComponents =() =>{
+            return <div>
+                <MyCustomComponent/>
+                <MyCustomComponent/>
+                <MyCustomComponent/>
+            </div>
+
+        }
+
+        const rootElement = document.getElementById('root');
+
+
+        const rootDiv = ReactDOM.createRoot(rootElement);
+
+        rootDiv.render(<MultipleComponents/>);  
+
+    </script>
+</body>
+</html>

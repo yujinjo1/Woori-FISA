@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const Counter = () => { 
+            console.log('렌더링됨');
+            
+            // useState의 시그니처
+            // const [상태로 관리할 값(변수),상태값 업데이트 함수] = useState('초기상태값');
+            const [count, setCount] = useState(0);
+            // let count = 0;
+            console.log(count);
+            
+            const clickHandler = () => {
+                console.log(`count: ${count}`);
+                // count += 1;  //  count는 읽기전용 변수
+                const updatedValue = count + 1;
+                //선언형이므로 count + + 라고 써도 괜찮음 ! 
+                setCount(updatedValue);
+            }
+    
+            return (
+                <div>
+                    <p>You clicked {count} times</p>
+                    <button onClick={clickHandler}>Click me!!</button>
+                </div>
+            )
+            
+        }
+        
+        const rootElement = document.getElementById('root');
+        const rootDiv = ReactDOM.createRoot(rootElement); 
+
+        rootDiv.render(<Counter />);
+    </script>
+</body>
+</html>

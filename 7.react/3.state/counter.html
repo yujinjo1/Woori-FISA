@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const Counter = () => {
+            // Counter가 한번 호출되면서 내부의 return 을 통해
+            //반환한 결과값(count:0)을 이전의 리액트 트리와 비교 
+            //리렌더링이 필요한 부분만 업데이트하여 Real DOM에 적용! 
+            let count =0;
+
+            //클릭에 따른 핸들링 처리함수
+            const clickHandler =()=>{
+
+                //count값 증가 로직 
+                console.log(`count:${count}`);
+                count +=1;
+
+
+
+            }
+            return(
+                <div>
+                    <p>You clicked {count} times</p>
+                    <button onClick = {clickHandler} >Click me!</button>
+                    </div>
+            )
+
+        }
+        
+        const rootElement = document.getElementById('root');
+        const rootDiv = ReactDOM.createRoot(rootElement); 
+
+        rootDiv.render(<Counter />);
+    </script>
+</body>
+</html>

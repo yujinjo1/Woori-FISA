@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- React & Babel CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const Products = () => {
+            return <div className="text-center">
+                    <h1>상품 목록</h1>
+                    <div className='flex justify-center'>
+                        <Product imgUrl='https://picsum.photos/id/42/200/200'
+                                 name='컵'
+                                 price='5,000' />
+                        {/* Product(https~, 컵, 5000)와 같음 */}
+                        <Product imgUrl='https://picsum.photos/id/39/200/200' name='LP' price='3,000'/>
+                        <Product imgUrl='https://picsum.photos/id/211/200/200' name='배' price='2,500'/>
+                        <Product imgUrl='https://picsum.photos/id/250/200/200' name='카메라' price='500'/>
+                    </div>
+                </div>
+        }
+
+        const Product = (props) => { 
+            // props라는 '객체'에 함수의 파라미터들이 각각의 프로퍼티로 구성되서 전달됨
+            console.log(props);
+            
+            return (
+                <div className='mx-2'>
+                    {/* props를 통해 받은 전달 값들을 동적으로 바인딩 */}
+                    <img src={props.imgUrl} alt={`${props.name}입니다.`}/>
+                    <h2>{props.name}</h2>
+                    <p>{props.price}원</p>
+                </div>
+            )
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+
+        // props를 통해 값을 내려줄 수 있음
+        root.render(<Products />);
+        
+
+    </script>
+
+</body>
+</html>

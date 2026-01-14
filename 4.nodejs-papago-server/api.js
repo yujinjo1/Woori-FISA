@@ -1,72 +1,55 @@
-//Papago API만 담당하는 “기능 모듈”
-// NCP(네이버 클라우드) API로 요청 처리 코드
-import HTTP from "superagent";
-// 1. 요청 객체 생성
+import HTTP from 'superagent'
 
-// 2. 요청 준비(URL, 전송할 데이터)
 const DETECT_URL = 'https://papago.apigw.ntruss.com/langs/v1/dect'
+const TRANSLATION_URL= 'https://papago.apigw.ntruss.com/nmt/v1/translation';
 
-const data = {
-    query: '안녕?'
-}
-// 직렬화
-const stringifiedData = JSON.stringify(data);
+import dotenv from 'dotenv';
+dotenv.config(); //env동작을 위한 설정 
 
-const API_ID = 'w0k0mhoxcw';
-const API_SECRET = 'tMUbOkTKwPTAsjw5FL8pVCwt1g178wLjgthFoBbM';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-// xhr.setRequestHeader('X-NCP-APIGW-API-KEY-ID', API_ID);
-// xhr.setRequestHeader('X-NCP-APIGW-API-KEY', API_SECRET);
+/** 
+ * Papago 언어 감지 외부 API
+ * @param {Object} payload - 감지할 언어 텍스트, 예: { query: 'Hello' }
+ * @returns {Promise<Object>} - 감지된 언어값, 예: { langCode: 'en' }
+ */
+export async function detectLanguage(payload) {
 
-export function detectLanguage(text,callback){
-    HTTP.post(DETECT_URL)
-        .send({query: text})
-        
-        .set('Content-Type','application/json')
-        .set('X-NCP-APIGW-API-KEY-ID',API_ID)
-        .set('X-NCP-APIGW-API-KEY', API_SECRET)
-        .end((err,res)=>{
-            if(err){
-                callback(err,null);
-                return;
-            }
-            callback(null, res.body.langCode);
-        });}
-
-export function translate(text,sourceLang, targetLang, callback){
-    HTTP.post(FTRANSLATE_URL)
-        .send({
-            source: sourceLang,
-            target: targetLang,
-            text: text
-            })
-
-        .set("Content-Type", "application/json")
-        .set("X-NCP-APIGW-API-KEY-ID", API_ID)
-        .set("X-NCP-APIGW-API-KEY", API_SECRET)
-
-        .end((err, res) => {
-            if (err) {
-        callback(err, null);
-        return;
-        }
-
-        const translatedText=
-            res.body.message.result.translatedText;
-
-        callback(null, translatedText);
-
-
-
-
-
-
-});
-
-    
-
+      const result = await HTTP
+                        .post(DETECT_URL) 
+                        .send(payload) 
+                        .set('Content-Type', 'application/json') 
+                        .set('x-ncp-apigw-api-key-id', CLIENT_ID)
+                        .set('x-ncp-apigw-api-key', CLIENT_SECRET);
+    return result.body;
 }
 
+export async function translate(payload) {
+    // Papago API 요청
+    const result = await HTTP
+        .post(TRANSLATION_URL)
+        .send(payload)
+        .set('Content-Type', 'application/json')
+        .set('x-ncp-apigw-api-key-id', CLIENT_ID)
+        .set('x-ncp-apigw-api-key', CLIENT_SECRET);
 
+    // Papago 응답 본문
+    const responseDataFromPapago = result.body;
 
-// 3. 요청 전송
+    // 필요한 데이터만 추출
+    const { // JS 객체 디스트럭처링 문법
+        srcLangType: detectedLanguage,
+        tarLangType: targetLanguage,
+        translatedText
+    } = responseDataFromPapago.message.result;
+
+    // 반환 포맷 구성
+    const responseData = {
+        detectedLanguage,
+        targetLanguage,
+        translatedText
+    };
+
+    return responseData;
+}

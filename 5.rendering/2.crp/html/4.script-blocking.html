@@ -1,0 +1,50 @@
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Script Blocking</title>
+</head>
+
+<body>
+    <h1>🍏 apple: 1</h1>
+    <h1>🍏 apple: 2</h1>
+    <h1>🍏 apple: 3</h1>
+
+    <link rel="stylesheet" href="http://localhost:3000/6000/css/h1-red.css" />
+
+    <!-- parser-blocking css -->
+    <script src="http://localhost:3000/js/sample.js"></script>
+    
+    <!-- 
+        script-blocking css
+        JS의 실행을 멈추게 하는 리소스
+        17번의 CSS가 먼저 다운되었어도, CSS가 모두 다운로드되어야 JS 코드가 실행됨
+
+        브라우저는 <script>를 실행할 때, 그 전에 <link ~>로 불러온 CSS가 아직 다운되지 않았을 경우,
+        해당 CSS가 모두 다운되고 파싱될 때까지 JS의 실행을 지연시킴
+
+        왜? 다운받은 JS가 DOM과 CSSOM을 조작할 가능성이 있기 때문에
+
+        따라서 <script> 자체는 parser blocking 리소스지만
+        그보다 앞선 CSS는 script의 실행을 차단시킬 수 있음(script-blocking)
+
+        <link rel="stylesheet" href="style.css">  CSS 다운로드 시작
+        <script src="main.js"></script>           실행하려면 CSS 로딩 기다림
+        이 경우:
+        브라우저는 style.css를 다운로드 시작
+        <script> 태그가 나오자 HTML 파싱 멈춤 (parser-blocking)
+        하지만 script 실행 전까지 CSS 다운로드와 파싱이 모두 끝나야 함
+        CSSOM과 DOM이 함께 준비된 후 JS 실행됨
+    -->
+
+    <h1>🍏 apple: 4</h1>
+    <h1>🍏 apple: 5</h1>
+    <h1>🍏 apple: 6</h1>
+    <h1>🍏 apple: 7</h1>
+    <h1>🍏 apple: 8</h1>
+    <h1>🍏 apple: 9</h1>
+    <h1>🍏 apple: 10</h1>
+</body>
+
+</html>

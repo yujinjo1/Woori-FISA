@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- React.js 코드를 CDN을 통해 받아서 활용 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- JSX를 사용하기 위해 필요한 의존성(Babel.js) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+</head>
+<body>
+    <!-- 앞으로 모든 HTML 엘리먼트들은 id가 root인 div 안에 렌더링될 것 -->
+    <div id="root">
+        <!-- 작성된 HTML 엘리먼트(컴포넌트)가 렌더링되는 부분 -->
+    </div>
+
+    <script>
+        //console.log(React); //React최상위 
+       // console.log(ReactDOM); //가상돔의 변경 내역을 실제 DOM에 업데이트 해주는 API
+    </script>
+
+    <script type="text/babel">
+        // 화면에 렌더링시키고 싶은 컴포넌트를 작성하는 부분
+            // 컴포넌트는 기본적으로 JS의 함수 형태로 작성
+            const MyCustomComponent = () => {
+                console.log('MyCustomComponent호출됨!');
+                return <div>커스텀 컴포넌트</div>
+            }
+
+        // 컴포넌트를 어디에 렌더링시킬 것인지?
+        const rootElement = document.getElementById('root');
+
+
+        //ReactDOM을 통해 root요소가 어디인지를 지정
+        const rootDiv = ReactDOM.createRoot(rootElement);
+
+        // TODO: React를 통해서 렌더링을 수행하는 코드
+        rootDiv.render(<MyCustomComponent/>);//<>로 감싸서 하나의 컴포넌트 형태로 전달  
+
+    </script>
+</body>
+</html>

@@ -22,18 +22,19 @@ sourceTextArea.addEventListener('input', (event) => {
             const data = {
                 query: text
             }
-            // 직렬화
+            // 직렬화(js객체->문자열변환, 이 과정을 통해 서버가 알아들을 수 있음 )
             const stringifiedData = JSON.stringify(data);
 
             xhr.open('POST', URL);
 
             // 요청 헤더에 Content-Type 추가
+            //이건 서버에게 말하는 거야:“내가 보내는 편지는jSON 형식이야”
             xhr.setRequestHeader('Content-Type', 'application/json');
             // 3. 요청 전송
             xhr.send(stringifiedData);
 
             // 4. 응답 완료 시 결과값 확인
-            
+            // 서버가 답장 다 쓰고 보내면 그때 이 함수 실행해줘, 미래에 실행!! 
             xhr.onload = () => {
                 const responseData = xhr.response;
                 console.log(responseData);

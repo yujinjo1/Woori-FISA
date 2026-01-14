@@ -1,0 +1,16 @@
+[req]
+default_bits = 2048         # 키 길이
+prompt = no                 # 인터랙티브 질문 없이 자동 생성
+default_md = sha256         # 서명 알고리즘
+req_extensions = req_ext
+distinguished_name = dn
+
+[dn]
+CN = localhost              # 서버의 대표 도메인
+
+[req_ext]
+subjectAltName = @alt_names # SAN 확장 필드 사용
+
+[alt_names]
+DNS.1 = localhost
+IP.1 = 127.0.0.1

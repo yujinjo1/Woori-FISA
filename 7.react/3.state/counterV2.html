@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React; // React 객체에서 useState만 추출
+
+        const Counter = () => { 
+            console.log('렌더링됨');
+            
+            // useState(초기상태값, 여기서는 count값)
+            const [_, render] = useState(0);
+
+            let count = 0;
+            console.log(`clickHandler 바깥 counter: ${count}`);
+            
+            const clickHandler = () => {
+                console.log(`count: ${count}`);
+                count += 1;
+                render(); // render는 컴포넌트를 재호출시키는 함수
+            }
+
+            /*
+                리액트의 렌더링은 함수형 컴포넌트(함수, Counter)에서 반환한 결과값인
+                return의 값으로 비교해서 처리되는데,
+
+                render()가 호출될 때마다 함수형 컴포넌트인 Counter()가 다시 호출되고,
+                지역변수 count는 0으로 초기화되기 때문에 비교대상이 없어져서
+                렌더링이 새롭게 발생하지 않게 됨
+            */
+            
+            return (
+                <div>
+                    <p>You clicked {count} times</p>
+                    <button onClick={clickHandler}>Click me!!</button>
+                </div>
+            )
+            
+        }
+        
+        const rootElement = document.getElementById('root');
+        const rootDiv = ReactDOM.createRoot(rootElement); 
+
+        rootDiv.render(<Counter />);
+    </script>
+</body>
+</html>
