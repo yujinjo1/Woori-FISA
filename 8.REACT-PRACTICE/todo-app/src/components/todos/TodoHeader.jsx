@@ -15,7 +15,7 @@ const TodoHeader = ({onAdd}) => {
             <button 
                 onClick={() => open(true)}
                 className="px-6 py-2 font-semibold text-gray-100 bg-gray-800 border-none rounded cursor-pointer"
-                data-cy="add-todo-button">Add Todo
+                data-cy="add-todo-button">할일 등록 
             </button>
 
             {/* Modal 코드 추가 */}
