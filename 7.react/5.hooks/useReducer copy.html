@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useReducer } = React;
+
+        // reducer 함수, 이벤트(action)를 받아서 카운트 상태값(state) 로직 처리 담당
+        const reducer = (state, action) => {
+            switch (action.type) {
+                case 'INCREASE':
+                    return state + action.data // 증가 로직
+                    
+            }
+        }
+
+        const App = () => {
+            // const [count, setCount] = useState(0);
+            // const [상태변수, 디스패치함수] = useReducer(로직처리함수, 초기값);
+            const [count, dispatch] = useReducer(reducer, 0);
+
+            // dispatch를 통해 useReducer의 첫 번째 인수로 전달된
+            // reducer()가 호출됨
+
+            // dispatch({ type: '이벤트명', data: '로직 처리에 사용할 값' })
+            const increase = () => dispatch({ type: 'INCREASE', data: 1 });
+
+            return (
+                <div>
+                    <p>카운트: {count}</p>
+                    <button onClick={increase}>증가</button>
+                    <button onClick={() => setCount(count - 1)}>감소</button>
+                    <button onClick={() => setCount(0)}>초기화</button>
+                </div>
+            );
+        };
+        
+        const rootElement = document.getElementById('root');
+        const rootDiv = ReactDOM.createRoot(rootElement); 
+
+        rootDiv.render(<App />);
+    </script>
+</body>
+</html>

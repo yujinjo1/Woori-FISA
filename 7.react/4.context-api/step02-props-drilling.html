@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, createContext ,useContext } = React;
+        
+        const MyContext=createContext(); //object 
+
+        const App = () => {
+            
+
+            const [data, setData] = useState('Hello from Parent');
+
+            return (
+                <div>
+                    
+                    <MyContext.Provider value={data}>
+                        <h1>{data}</h1>
+                        <A data={data} setData={setData} />
+                    </MyContext.Provider>
+
+                    <div>A와는 관련없는 도메인 </div>
+                </div>
+            );
+        };
+
+        const A = ({ data, setData }) => {
+            return (
+                <div>
+                    <h2>{data}</h2>
+                    <B data={data} setData={setData} />
+                </div>
+            );
+        };
+
+        const B = ({ data, setData }) => {
+            return (
+                <div>
+                    <h3>{data}</h3>
+                    <C data={data} setData={setData} />
+                </div>
+            );
+        };
+
+        const C = ({ data, setData }) => {
+            return (
+                <div>
+                    <h4>{data}</h4>
+                    <D data={data} setData={setData}/>
+                </div>
+            );
+        };
+
+        ///최하단 컴포넌트에서 Context를 통한 데이터 받아오기 
+
+        const D = ({ setData }) => {
+
+            //
+
+            const data= useContext(MyContext);
+            console.log(data);
+
+            const clickHandler = () => setData('Data changed');
+
+            return (
+                <div>
+                    <h5>{data}</h5>
+                    <button onClick={clickHandler}>Change Data</button>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
